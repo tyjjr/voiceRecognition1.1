@@ -1,10 +1,11 @@
 /*============================================================
 
-VoiceLED.ino——Voice Recognition模块样例程序
-上海智位机器人有限公司 版权所有
-http://www.dfrobot.com.cn
-2014-8-11
-
+ *	Copyright:	DFRobot
+ *	name:		VoiceLED.ino——Voice Recognition模块样例程序
+ *  function:   通过语音控制LED灯亮灭
+ *	Author:		Kelvin 
+ *	Date:		2014-8-11
+ 
 ===========================================================*/
 #include <VoiceRecognition.h>
 VoiceRecognition Voice;
