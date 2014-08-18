@@ -143,23 +143,30 @@ void VoiceRecognition::init(uint8_t mic)////////模块启用，参数为麦克风选择（MIC/
 	pinMode(RSTB,OUTPUT);
 	pinMode(CS, OUTPUT);
 	cSHigh();
+
 	pinMode(SPI_MISO_PIN, INPUT);
 	pinMode(SPI_MOSI_PIN, OUTPUT);
 	pinMode(SPI_SCK_PIN, OUTPUT);
 
 	#ifndef SOFTWARE_SPI
 	  // SS must be in output mode even it is not chip select
-	  pinMode(SS_PIN, OUTPUT);
-	  digitalWrite(SS_PIN, HIGH); // disable any SPI device using hardware SS 拉高ss
+	  pinMode(LD_CHIP_SELECT_PIN, OUTPUT);
+	  digitalWrite(LD_CHIP_SELECT_PIN, HIGH); // disable any SPI device using hardware SS 拉高ss
 	  // Enable SPI, Master, clock rate f_osc/128
 	  SPCR = (1 << SPE) | (1 << MSTR) | (1 << SPR1) | (1 << SPR0);/////初始化SPI寄存器
 	  // clear double speed
 	  SPSR &= ~(1 << SPI2X);//2倍速
 	#endif  // SOFTWARE_SPI	
-	
+
 	SPCR = (SPCR & ~SPI_MODE_MASK) | 0x08;//设置SCK常态电平与取样时间，0x08为SCK常态为高电平，下降沿有效
 	reset();//LD3320复位操作
-	attachInterrupt(0,update,LOW);//开中断	
+	
+	#if defined(__AVR_ATmega32U4__)
+		attachInterrupt(1,update,LOW);//开中断	
+	#else
+		attachInterrupt(0,update,LOW);//开中断	
+	#endif
+	
 	ASR_init();///语音识别初始化函数	
 }
 

@@ -13,7 +13,6 @@ http://www.dfrobot.com.cn
 #define _VoiceRecognition_H_
 #include <utility/PinMap.h>
 #include <Arduino.h>
-
 #define uint8 unsigned char
 #define SPI_MODE_MASK 0x0C  // CPOL = bit 3, CPHA = bit 2 on SPCR
 #define MIC 0x0b
@@ -26,6 +25,8 @@ http://www.dfrobot.com.cn
 #define PLL_ASR_1D 		0x1f
 
 
+
+#define MEGA_SOFT_SPI 0
 #if MEGA_SOFT_SPI && (defined(__AVR_ATmega1280__)||defined(__AVR_ATmega2560__))
 #define SOFTWARE_SPI
 #endif  // MEGA_SOFT_SPI
@@ -35,16 +36,15 @@ http://www.dfrobot.com.cn
 #ifndef SOFTWARE_SPI
 // hardware pin defs
 
-/** The default chip select pin for the VOICE is SS. */
-uint8_t const  LD_CHIP_SELECT_PIN = SS_PIN;
+uint8_t const  LD_CHIP_SELECT_PIN = SS;
 // The following three pins must not be redefined for hardware SPI.
 /** SPI Master Out Slave In pin */
-uint8_t const  SPI_MOSI_PIN = MOSI_PIN;
+uint8_t const  SPI_MOSI_PIN = MOSI;
 /** SPI Master In Slave Out pin */
-uint8_t const  SPI_MISO_PIN = MISO_PIN;
+uint8_t const  SPI_MISO_PIN = MISO;
 /** SPI Clock pin */
-uint8_t const  SPI_SCK_PIN = SCK_PIN;
-
+uint8_t const  SPI_SCK_PIN = SCK;
+/** optimize loops for hardware SPI */
 /** optimize loops for hardware SPI */
 #define OPTIMIZE_HARDWARE_SPI
 
@@ -60,6 +60,9 @@ uint8_t const SPI_MISO_PIN = 12;
 uint8_t const SPI_SCK_PIN = 13;
 
 #endif  // SOFTWARE_SPI
+
+
+
 
 class VoiceRecognition
 {

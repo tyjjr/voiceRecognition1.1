@@ -2,7 +2,7 @@
 
  *	Copyright:	DFRobot
  *	name:		VoiceLED.ino——Voice Recognition模块样例程序
- *  function:   通过语音控制LED灯亮灭
+ *      function:       通过语音控制LED灯亮灭
  *	Author:		Kelvin 
  *	Date:		2014-8-11
  
@@ -26,11 +26,11 @@ void loop() {
   {
     case 0://若是指令“kai deng”
 	digitalWrite(Led,HIGH);//点亮LED
-	Serial.println("received"kai deng",command flag"0"");//串口发送received"kai deng",command flag"0"
+	Serial.println("received'kai deng',command flag'0'");//串口发送received"kai deng",command flag"0"
     break;
     case 1://若是指令“guan deng”
 	digitalWrite(Led,LOW);//熄灭LED
-	Serial.println("received"guan deng",command flag"1"");//串口发送"received"guan deng",command flag"1"
+	Serial.println("received'guan deng',command flag'1'");//串口发送"received"guan deng",command flag"1"
     break;   
   }
 }
